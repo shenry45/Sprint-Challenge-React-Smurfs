@@ -6,6 +6,7 @@ import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import Header from './components/Header';
+import SmurfDelete from './components/SmurfDelete';
 
 class App extends Component {
   constructor(props) {
@@ -38,7 +39,8 @@ class App extends Component {
             render={
               () => <Smurfs smurfs={this.state.smurfs} exact />
             }
-          />      
+          />
+          <SmurfDelete />
         </div>
       </Router>
     );
