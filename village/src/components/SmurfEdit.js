@@ -5,18 +5,19 @@ class SmurfForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: undefined,
       name: '',
       age: '',
       height: ''
     };
   }
 
-  addSmurf = event => {
+  editSmurf = event => {
     event.preventDefault();
     
     // add smurf to API
     Axios
-      .post('http://localhost:3333/smurfs', {
+      .put(`http://localhost:3333/smurfs/${this.state.id}`, {
           name: this.state.name,
           age: this.state.age,
           height: this.state.height
@@ -24,6 +25,7 @@ class SmurfForm extends Component {
       )
       .then(() => {
         this.setState({
+          id: undefined,
           name: '',
           age: '',
           height: ''
@@ -36,10 +38,21 @@ class SmurfForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  componentDidMount() {
+    const idParent = document.querySelector('.smurf-ids');
+
+    this.props.smurfs.forEach(smurf => {
+      idParent.insertAdjacentHTML("beforeend",   `<option>${smurf.id}</option>`);
+    })
+
+  }
+
   render() {
     return (
-      <div className="SmurfForm">
+      <div>
         <form onSubmit={this.addSmurf}>
+          <select className="smurf-ids">
+          </select>
           <input
             onChange={this.handleInputChange}
             placeholder="name"
