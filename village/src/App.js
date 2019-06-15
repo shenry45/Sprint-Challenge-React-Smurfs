@@ -7,6 +7,7 @@ import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import Header from './components/Header';
 import SmurfDelete from './components/SmurfDelete';
+import SmurfEdit from './components/SmurfEdit';
 
 class App extends Component {
   constructor(props) {
@@ -32,6 +33,10 @@ class App extends Component {
           <Route
             path="/smurf-form"
             component={SmurfForm}
+          />
+          <Route
+            path="/smurf-edit"
+            render={() => <SmurfEdit smurfs={this.state.smurfs}/>}
           />
           <Route
             path="/"
